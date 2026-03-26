@@ -41,14 +41,14 @@ dependencies:
 ---
 
 ## 📖 Sommaire de la Documentation
-1. [👤 Gestion des Joueurs & Grades](docs/PLAYERS.md)
-2. [💰 Économie & Statistiques](docs/ECONOMY.md)
-3. [🖼️ Interface Graphique (Menus)](docs/GUI.md)
-4. [🌐 Communication BungeeCord](docs/BUNGEE.md)
-5. [🗄️ Base de données SQL](docs/DATABASE.md)
-6. [🎮 Outils pour Mini-Jeux & Tablist](docs/GAME.md)
-7. [🛠️ Boîte à Outils (Utils)](docs/UTILS.md)
-8. [🎓 Tutoriel : Créer un mini-jeu](docs/TUTORIAL.md)
+1. [👤 Gestion des Joueurs & Grades](docs/PLAYERS)
+2. [💰 Économie & Statistiques](docs/ECONOMY)
+3. [🖼️ Interface Graphique (Menus)](docs/GUI)
+4. [🌐 Communication BungeeCord](docs/BUNGEE)
+5. [🗄️ Base de données SQL](docs/DATABASE)
+6. [🎮 Outils pour Mini-Jeux & Tablist](docs/GAME)
+7. [🛠️ Boîte à Outils (Utils)](docs/UTILS)
+8. [🎓 Tutoriel : Créer un mini-jeu](docs/TUTORIAL)
 
 ---
 
