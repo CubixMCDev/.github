@@ -30,22 +30,35 @@ ItemStack epee = new ItemBuilder(Material.DIAMOND_SWORD)
 ```
 
 ### 🌍 Système de Langue (`LangManager`)
-L'API gère la traduction multilingue (`fr_fr`, `en_us`) en créant dynamiquement un dossier `langs` pour votre plugin.
+L'API intègre un puissant gestionnaire de traductions multilingues (`fr_fr`, `en_us`, etc.) lié directement à la base de données (MariaDB). Il crée dynamiquement un dossier `langs` par plugin et gère les variables ainsi que les messages multi-lignes.
 
 **1. Initialisation dans le `onEnable` de votre plugin :**
 ```java
 import com.cubixmc.api.utils.LangManager;
 
-LangManager.init(this); // Charge les fichiers YAML du dossier langs/
-LangManager.setDefaultLang("fr_fr");
+LangManager.init(this); // Charge tous les fichiers YAML du dossier langs/ de votre plugin
+LangManager.setDefaultLang("fr_fr"); // Langue par défaut de secours
 ```
 
-**2. Utilisation en jeu :**
-L'API va automatiquement vérifier la langue choisie par le joueur dans la base de données et formater le message.
+**2. Configuration des fichiers (ex: `langs/fr_fr.yml` & `langs/en_us.yml`) :**
+Le système supporte les codes couleurs (`&`), les sauts de ligne (`\n`), et les arguments dynamiques indexés (`{0}`, `{1}`, etc.).
+
+*Dans `fr_fr.yml` :*
+```yaml
+welcome.message: "&eBienvenue {0} sur le serveur !\n&7Vous avez actuellement &6{1} coins&7."
+```
+
+*Dans `en_us.yml` :*
+```yaml
+welcome.message: "&eWelcome {0} to the server!\n&7You currently have &6{1} coins&7."
+```
+
+**3. Utilisation en jeu :**
+L'API va automatiquement récupérer la langue du joueur via son profil (`CubixPlayer`), formater le message avec les arguments, et l'envoyer.
 ```java
-// Dans fr_fr.yml : welcome_message: "Bienvenue %s sur le jeu !"
-// Dans en_us.yml : welcome_message: "Welcome %s to the game!"
-
-// Envoie directement le message traduit au joueur en remplaçant %s par son pseudo
-LangManager.sendMessage(player, "welcome_message", "Fallback par défaut", true, player.getName());
+// Paramètres : Joueur, ID du message, Message de secours (fallback), Activer les couleurs, Arguments...
+LangManager.sendMessage(player, "welcome.message", "§cMessage introuvable", true, player.getName(), cp.getCoins());
 ```
+
+**4. Sélection obligatoire de la langue :**
+Lors de leur toute première connexion au réseau, la langue des joueurs est définie sur `null` dans la base de données. L'API les force automatiquement à ouvrir une interface graphique (`LanguageMenu`) qu'ils ne peuvent pas fermer (anti-Échap) tant qu'ils n'ont pas sélectionné leur drapeau. Leur choix est ensuite sauvegardé de manière globale pour tout le réseau.
