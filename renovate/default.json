@@ -29,12 +29,12 @@
   ],
   "customManagers": [
     {
-      "description": "Versions de ViaVersion et ViaBackwards téléchargées pour le proxy local.",
+      "description": "Versions annotées « # renovate: » dans le catalogue (ex. ViaVersion pour le proxy de test).",
       "customType": "regex",
-      "managerFilePatterns": ["/(^|/)build\\.gradle\\.kts$/"],
-      "matchStrings": ["hangar\\(\"(?<depName>ViaVersion|ViaBackwards)\", \"(?<currentValue>[^\"]+)\"\\)"],
-      "packageNameTemplate": "ViaVersion/{{{depName}}}",
-      "datasourceTemplate": "github-releases"
+      "managerFilePatterns": ["/(^|/)libs\\.versions\\.toml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n[a-z0-9-]+ = \"(?<currentValue>[^\"]+)\""
+      ]
     }
   ]
 }
