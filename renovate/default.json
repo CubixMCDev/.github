@@ -1,0 +1,40 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Règles Renovate communes à tous les dépôts CubixMC.",
+  "extends": ["config:recommended", ":dependencyDashboard"],
+  "timezone": "Europe/Brussels",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dépendances"],
+  "packageRules": [
+    {
+      "description": "Minestom, Velocity et Via : alerte immédiate, chaque version de Minecraft en dépend.",
+      "matchPackageNames": ["net.minestom:**", "com.velocitypowered:**", "ViaVersion/**"],
+      "groupName": "Minecraft (Minestom, Velocity, Via)",
+      "schedule": ["at any time"],
+      "labels": ["minecraft"]
+    },
+    {
+      "description": "Outillage qualité et tests, groupés pour limiter le bruit.",
+      "matchPackageNames": [
+        "org.junit:**",
+        "org.assertj:**",
+        "com.google.errorprone:**",
+        "com.uber.nullaway:**",
+        "com.palantir.javaformat:**",
+        "com.diffplug.spotless:**",
+        "net.ltgt.gradle:**"
+      ],
+      "groupName": "outillage qualité"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "Versions de ViaVersion et ViaBackwards téléchargées pour le proxy local.",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)build\\.gradle\\.kts$/"],
+      "matchStrings": ["hangar\\(\"(?<depName>ViaVersion|ViaBackwards)\", \"(?<currentValue>[^\"]+)\"\\)"],
+      "packageNameTemplate": "ViaVersion/{{{depName}}}",
+      "datasourceTemplate": "github-releases"
+    }
+  ]
+}
