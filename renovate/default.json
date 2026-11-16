@@ -25,6 +25,11 @@
         "net.ltgt.gradle:**"
       ],
       "groupName": "outillage qualité"
+    },
+    {
+      "description": "Log4j : le proxy compile contre celui que Velocity embarque, on le suit à la main.",
+      "matchPackageNames": ["org.apache.logging.log4j:**"],
+      "enabled": false
     }
   ],
   "customManagers": [
